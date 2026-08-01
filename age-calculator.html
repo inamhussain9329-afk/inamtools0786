@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator - Calculate Your Exact Age in Years, Months & Days | InamTools</title>
+<meta name="description" content="Free online Age Calculator by InamTools. Instantly calculate your exact age in years, months, and days, total days lived, and countdown to your next birthday.">
+<meta name="keywords" content="age calculator, calculate age online, date of birth calculator, next birthday countdown, InamTools">
+<meta name="author" content="InamTools">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Age Calculator | InamTools">
+<meta property="og:description" content="Calculate your exact age in years, months, and days instantly with InamTools' free Age Calculator.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d0f14">
+<style>
+  :root{
+    --bg:#0d0f14;
+    --panel:#151821;
+    --panel-2:#1b1f2b;
+    --border:#262b3a;
+    --text:#e9ecf5;
+    --muted:#8b93a7;
+    --accent:#7c5cff;
+    --accent-2:#38e0d8;
+    --danger:#ff5c7a;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(124,92,255,0.18), transparent 60%),
+      radial-gradient(1000px 500px at 100% 10%, rgba(56,224,216,0.12), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .card{
+    width:100%;
+    max-width:560px;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .brand .logo{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;color:#0d0f14;
+  }
+  .brand span{
+    font-weight:700;
+    letter-spacing:0.3px;
+    color:var(--text);
+  }
+  h1{
+    font-size:22px;
+    font-weight:700;
+    margin:18px 0 4px;
+  }
+  p.subtitle{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:24px;
+  }
+  label{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .input-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  input[type="date"]{
+    flex:1;
+    min-width:180px;
+    background:#0f1219;
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:14px 16px;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    transition:border-color .2s, box-shadow .2s;
+    color-scheme: dark;
+  }
+  input[type="date"]:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(124,92,255,0.25);
+  }
+  .btn-row{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  button{
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    padding:13px 20px;
+    border-radius:12px;
+    transition:transform .15s, opacity .15s, box-shadow .2s;
+  }
+  button:active{transform:scale(0.97);}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--accent), #a06bff);
+    color:#fff;
+    flex:1;
+    box-shadow:0 8px 20px rgba(124,92,255,0.35);
+  }
+  .btn-secondary{
+    background:transparent;
+    color:var(--muted);
+    border:1px solid var(--border);
+  }
+  .btn-secondary:hover{
+    color:var(--text);
+    border-color:#3a3f52;
+  }
+  .error{
+    color:var(--danger);
+    font-size:13px;
+    margin-top:10px;
+    display:none;
+  }
+  .results{
+    margin-top:28px;
+    display:none;
+  }
+  .results.show{display:block;}
+  .result-main{
+    background:#0f1219;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .result-main .value{
+    font-size:26px;
+    font-weight:800;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .result-main .label{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:6px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .stat{
+    background:#0f1219;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px;
+  }
+  .stat .num{
+    font-size:19px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .stat .lbl{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:4px;
+  }
+  .countdown{
+    background:linear-gradient(135deg, rgba(124,92,255,0.15), rgba(56,224,216,0.1));
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .countdown .txt{
+    font-size:14px;
+    color:var(--text);
+  }
+  .countdown .days{
+    font-size:20px;
+    font-weight:800;
+    color:var(--accent-2);
+  }
+  .copy-row{
+    margin-top:16px;
+    display:flex;
+    justify-content:flex-end;
+  }
+  .btn-copy{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    font-size:13px;
+    padding:10px 16px;
+  }
+  .btn-copy:hover{border-color:var(--accent);}
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--panel-2);
+    border:1px solid var(--accent);
+    color:var(--text);
+    padding:12px 20px;
+    border-radius:10px;
+    font-size:14px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s, transform .25s;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:22px;
+  }
+  @media (max-width:420px){
+    .card{padding:22px;}
+    .grid{grid-template-columns:1fr 1fr;}
+    h1{font-size:19px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand">
+    <div class="logo">IT</div>
+    <span>InamTools</span>
+  </div>
+  <h1>Age Calculator</h1>
+  <p class="subtitle">Select your date of birth to calculate your exact age.</p>
+
+  <label for="dob">Date of Birth</label>
+  <div class="input-row">
+    <input type="date" id="dob">
+  </div>
+  <div class="error" id="errorMsg">Please select a valid date of birth (not in the future).</div>
+
+  <div class="btn-row">
+    <button class="btn-primary" id="calcBtn">Calculate Age</button>
+    <button class="btn-secondary" id="clearBtn">Clear</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="result-main">
+      <div class="value" id="mainAge">0 Years, 0 Months, 0 Days</div>
+      <div class="label">Your Exact Age</div>
+    </div>
+
+    <div class="grid">
+      <div class="stat">
+        <div class="num" id="totalDays">0</div>
+        <div class="lbl">Total Days Lived</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="totalMonths">0</div>
+        <div class="lbl">Total Months Lived</div>
+      </div>
+    </div>
+
+    <div class="countdown">
+      <div class="txt">Next Birthday</div>
+      <div class="days" id="nextBday">0 days left</div>
+    </div>
+
+    <div class="copy-row">
+      <button class="btn-copy" id="copyBtn">📋 Copy Result</button>
+    </div>
+  </div>
+
+  <footer>&copy; <span id="year"></span> InamTools. All calculations done locally in your browser.</footer>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const dobInput = document.getElementById('dob');
+  const calcBtn = document.getElementById('calcBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const errorMsg = document.getElementById('errorMsg');
+  const results = document.getElementById('results');
+  const toast = document.getElementById('toast');
+
+  // set max date to today
+  const todayStr = new Date().toISOString().split('T')[0];
+  dobInput.setAttribute('max', todayStr);
+
+  let lastResultText = '';
+
+  function calculateAge(){
+    errorMsg.style.display = 'none';
+    const val = dobInput.value;
+
+    if(!val){
+      errorMsg.textContent = 'Please select your date of birth.';
+      errorMsg.style.display = 'block';
+      results.classList.remove('show');
+      return;
+    }
+
+    const dob = new Date(val + 'T00:00:00');
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    if(dob > today){
+      errorMsg.textContent = 'Date of birth cannot be in the future.';
+      errorMsg.style.display = 'block';
+      results.classList.remove('show');
+      return;
+    }
+
+    // Years, Months, Days calculation
+    let years = today.getFullYear() - dob.getFullYear();
+    let months = today.getMonth() - dob.getMonth();
+    let days = today.getDate() - dob.getDate();
+
+    if(days < 0){
+      months--;
+      const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if(months < 0){
+      years--;
+      months += 12;
+    }
+
+    // total days lived
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const totalDaysLived = Math.floor((today - dob) / msPerDay);
+    const totalMonthsLived = years * 12 + months;
+
+    // next birthday countdown
+    let nextBirthday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+    if(nextBirthday < today){
+      nextBirthday = new Date(today.getFullYear() + 1, dob.getMonth(), dob.getDate());
+    }
+    const daysToNextBday = Math.ceil((nextBirthday - today) / msPerDay);
+
+    // render
+    document.getElementById('mainAge').textContent = `${years} Years, ${months} Months, ${days} Days`;
+    document.getElementById('totalDays').textContent = totalDaysLived.toLocaleString();
+    document.getElementById('totalMonths').textContent = totalMonthsLived.toLocaleString();
+    document.getElementById('nextBday').textContent = daysToNextBday === 0 ? '🎉 Today!' : `${daysToNextBday} days left`;
+
+    lastResultText =
+`My Age: ${years} Years, ${months} Months, ${days} Days
+Total Days Lived: ${totalDaysLived.toLocaleString()}
+Total Months Lived: ${totalMonthsLived.toLocaleString()}
+Next Birthday In: ${daysToNextBday} days
+Calculated via InamTools Age Calculator`;
+
+    results.classList.add('show');
+  }
+
+  function clearAll(){
+    dobInput.value = '';
+    errorMsg.style.display = 'none';
+    results.classList.remove('show');
+    lastResultText = '';
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(()=> toast.classList.remove('show'), 2000);
+  }
+
+  async function copyResult(){
+    if(!lastResultText){
+      showToast('Nothing to copy yet');
+      return;
+    }
+    try{
+      await navigator.clipboard.writeText(lastResultText);
+      showToast('Copied to clipboard!');
+    }catch(err){
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = lastResultText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copied to clipboard!');
+    }
+  }
+
+  calcBtn.addEventListener('click', calculateAge);
+  clearBtn.addEventListener('click', clearAll);
+  copyBtn.addEventListener('click', copyResult);
+  dobInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') calculateAge(); });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator — Text, URL, Phone, Email &amp; Wi-Fi | InamTools</title>
+<meta name="description" content="Generate QR codes instantly for text, links, phone numbers, emails, or Wi-Fi credentials — right in your browser. Download as PNG. No paid API, no tracking.">
+<meta name="keywords" content="QR code generator, free QR code, wifi QR code, QR code download, InamTools">
+<meta name="author" content="InamTools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#12141B">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR Code Generator — InamTools">
+<meta property="og:description" content="Turn text, links, phone numbers, emails, or Wi-Fi details into a scannable QR code instantly.">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QR Code Generator — InamTools">
+<meta name="twitter:description" content="Turn text, links, phone numbers, emails, or Wi-Fi details into a scannable QR code instantly.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312141B'/%3E%3Crect x='14' y='14' width='14' height='14' fill='%23C89B3C'/%3E%3Crect x='36' y='14' width='14' height='14' fill='%23C89B3C'/%3E%3Crect x='14' y='36' width='14' height='14' fill='%23C89B3C'/%3E%3Crect x='36' y='36' width='6' height='6' fill='%23C89B3C'/%3E%3Crect x='44' y='44' width='6' height='6' fill='%23C89B3C'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink-950:#12141B;
+    --ink-900:#171A23;
+    --ink-850:#1A1D27;
+    --ink-800:#1D212C;
+    --ink-700:#2A2F3D;
+    --paper:#ECE8DD;
+    --paper-dim:#9A988E;
+    --paper-faint:#6E6C63;
+    --brass:#C89B3C;
+    --brass-dim:#8A7135;
+    --brass-soft:rgba(200,155,60,0.14);
+    --teal:#5FA8A0;
+    --rust:#C1553B;
+    --shadow:0 16px 40px rgba(0,0,0,0.38);
+    --shadow-sm:0 6px 18px rgba(0,0,0,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    background:
+      radial-gradient(ellipse 1000px 560px at 12% -8%, rgba(200,155,60,0.10), transparent 58%),
+      radial-gradient(ellipse 800px 640px at 100% 6%, rgba(95,168,160,0.07), transparent 55%),
+      var(--ink-950);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index:0;
+  }
+
+  .wrap{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:0 24px 70px; }
+  a{ color:inherit; }
+
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+
+  /* ---------- Nav ---------- */
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:26px 0;
+    animation:riseIn .5s ease both;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:21px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    text-decoration:none;
+    display:flex;
+    align-items:baseline;
+    gap:1px;
+  }
+  .logo .dot{ color:var(--brass); font-style:italic; }
+  .nav-back{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    text-decoration:none;
+    border:1px solid var(--ink-700);
+    border-radius:6px;
+    padding:9px 15px;
+    transition:border-color .15s ease, color .15s ease, transform .12s ease;
+  }
+  .nav-back:hover{ border-color:var(--brass-dim); color:var(--paper); transform:translateY(-1px); }
+
+  /* ---------- Hero ---------- */
+  .hero{ text-align:center; padding:26px 0 40px; }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 16px;
+    animation:riseIn .5s ease .06s both;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(30px, 5.5vw, 44px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 14px;
+    animation:riseIn .5s ease .1s both;
+  }
+  h1 .accent{ font-style:italic; color:var(--brass); }
+  .subhead{
+    font-size:15.5px;
+    line-height:1.6;
+    color:var(--paper-dim);
+    max-width:460px;
+    margin:0 auto;
+    animation:riseIn .5s ease .14s both;
+  }
+
+  /* ---------- Console panel ---------- */
+  .console{
+    background:var(--ink-900);
+    border:1px solid var(--ink-700);
+    border-radius:16px;
+    padding:26px;
+    box-shadow:var(--shadow);
+    animation:riseIn .5s ease .18s both;
+  }
+
+  /* type chips */
+  .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+  .chip{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:transparent;
+    color:var(--paper-dim);
+    border:1px solid var(--ink-700);
+    border-radius:999px;
+    padding:8px 15px;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .chip:hover{ border-color:var(--brass-dim); color:var(--paper); }
+  .chip.active{ background:var(--brass); border-color:var(--brass); color:var(--ink-950); }
+
+  /* form fields */
+  .field-group{ display:none; flex-direction:column; gap:14px; margin-bottom:22px; }
+  .field-group.active{ display:flex; animation:fadeIn .25s ease both; }
+
+  .field label{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--paper-faint);
+    margin-bottom:7px;
+  }
+  .field input[type="text"],
+  .field input[type="url"],
+  .field input[type="tel"],
+  .field input[type="email"],
+  .field textarea,
+  .field select{
+    width:100%;
+    background:var(--ink-850);
+    border:1px solid var(--ink-700);
+    border-radius:9px;
+    padding:12px 14px;
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size:14.5px;
+    outline:none;
+    transition:border-color .18s ease, box-shadow .18s ease;
+  }
+  .field textarea{ resize:vertical; min-height:80px; line-height:1.5; }
+  .field input:focus, .field textarea:focus, .field select:focus{
+    border-color:var(--brass-dim);
+    box-shadow:0 0 0 3px var(--brass-soft);
+  }
+  .field input::placeholder, .field textarea::placeholder{ color:var(--paper-faint); }
+  .field select{ appearance:none; cursor:pointer; }
+
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .checkbox-row{ display:flex; align-items:center; gap:9px; }
+  .checkbox-row input{ width:16px; height:16px; accent-color:var(--brass); }
+  .checkbox-row label{ margin:0; font-family:'Inter', sans-serif; text-transform:none; font-size:13.5px; color:var(--paper-dim); letter-spacing:0; }
+
+  /* QR preview */
+  .qr-stage{
+    background:#FFFFFF;
+    border-radius:14px;
+    padding:24px 24px 18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    box-shadow:var(--shadow-sm);
+    border:1px solid var(--ink-700);
+  }
+  #qrCanvasHolder{
+    width:220px;
+    height:220px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  #qrCanvasHolder img, #qrCanvasHolder canvas{
+    display:block;
+    max-width:100%;
+    height:auto;
+    animation:fadeIn .25s ease both;
+  }
+  .qr-placeholder{
+    width:220px; height:220px;
+    border:1.5px dashed #D8D4C7;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#B7B3A5;
+    font-family:'Inter', sans-serif;
+    font-size:12.5px;
+    text-align:center;
+    padding:20px;
+    line-height:1.5;
+  }
+  .qr-caption{
+    width:100%;
+    border-top:1px dashed #DCD8CB;
+    padding-top:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#8A8776;
+  }
+  .qr-caption .type-tag{ color:var(--brass-dim); font-weight:700; }
+
+  /* actions */
+  .qr-actions{ display:flex; gap:10px; margin-top:20px; }
+  .btn{
+    flex:1;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    border-radius:9px;
+    padding:13px 16px;
+    cursor:pointer;
+    text-align:center;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:background .15s ease, border-color .15s ease, color .15s ease, transform .12s ease;
+    border:1px solid var(--ink-700);
+    background:var(--ink-850);
+    color:var(--paper-dim);
+  }
+  .btn:hover:not(:disabled){ border-color:var(--brass-dim); color:var(--paper); transform:translateY(-1px); }
+  .btn:active:not(:disabled){ transform:translateY(0); }
+  .btn svg{ width:15px; height:15px; }
+  .btn.primary{ background:var(--brass); border-color:var(--brass); color:var(--ink-950); }
+  .btn.primary:hover:not(:disabled){ background:#DBAF52; color:var(--ink-950); }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  /* ---------- Toasts ---------- */
+  .toast-stack{ position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:8px; z-index:50; }
+  .toast{
+    background:var(--ink-800);
+    border:1px solid var(--ink-700);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size:13.5px;
+    padding:11px 16px;
+    border-radius:8px;
+    box-shadow:var(--shadow);
+    animation:toastIn .25s ease both, toastOut .25s ease 2.4s both;
+  }
+  @keyframes toastIn{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes toastOut{ from{ opacity:1; } to{ opacity:0; transform:translateY(-4px); } }
+
+  footer{
+    text-align:center;
+    margin-top:40px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--paper-faint);
+    animation:riseIn .5s ease .24s both;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    nav, .eyebrow, h1, .subhead, .console, footer{ animation:none !important; }
+    #qrCanvasHolder img, #qrCanvasHolder canvas, .field-group.active{ animation:none !important; }
+  }
+
+  @media (max-width:520px){
+    .console{ padding:20px; }
+    .field-row{ grid-template-columns:1fr; }
+    .qr-actions{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="inamtools-home.html"><span>InamTools</span><span class="dot">.</span></a>
+    <a class="nav-back" href="inamtools-home.html">← All tools</a>
+  </nav>
+
+  <header class="hero">
+    <p class="eyebrow">Sharing tool</p>
+    <h1>Turn anything into a <span class="accent">code</span>.</h1>
+    <p class="subhead">Text, links, phone numbers, emails, or Wi-Fi credentials — encoded instantly, right in your browser.</p>
+  </header>
+
+  <main class="console">
+    <div class="chips" id="typeChips">
+      <button class="chip active" data-type="text" type="button">Text</button>
+      <button class="chip" data-type="url" type="button">URL</button>
+      <button class="chip" data-type="phone" type="button">Phone</button>
+      <button class="chip" data-type="email" type="button">Email</button>
+      <button class="chip" data-type="wifi" type="button">Wi-Fi</button>
+    </div>
+
+    <div class="field-group active" data-group="text">
+      <div class="field">
+        <label for="fieldText">Text</label>
+        <textarea id="fieldText" placeholder="Type or paste anything you'd like to encode…"></textarea>
+      </div>
+    </div>
+
+    <div class="field-group" data-group="url">
+      <div class="field">
+        <label for="fieldUrl">Website URL</label>
+        <input type="url" id="fieldUrl" placeholder="example.com or https://example.com">
+      </div>
+    </div>
+
+    <div class="field-group" data-group="phone">
+      <div class="field">
+        <label for="fieldPhone">Phone number</label>
+        <input type="tel" id="fieldPhone" placeholder="+1 555 123 4567">
+      </div>
+    </div>
+
+    <div class="field-group" data-group="email">
+      <div class="field">
+        <label for="fieldEmailAddr">Email address</label>
+        <input type="email" id="fieldEmailAddr" placeholder="name@example.com">
+      </div>
+      <div class="field">
+        <label for="fieldEmailSubject">Subject (optional)</label>
+        <input type="text" id="fieldEmailSubject" placeholder="Subject line">
+      </div>
+      <div class="field">
+        <label for="fieldEmailBody">Message (optional)</label>
+        <textarea id="fieldEmailBody" placeholder="Prefilled message body…"></textarea>
+      </div>
+    </div>
+
+    <div class="field-group" data-group="wifi">
+      <div class="field">
+        <label for="fieldWifiSsid">Network name (SSID)</label>
+        <input type="text" id="fieldWifiSsid" placeholder="Home Wi-Fi">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="fieldWifiEncryption">Security</label>
+          <select id="fieldWifiEncryption">
+            <option value="WPA">WPA / WPA2</option>
+            <option value="WEP">WEP</option>
+            <option value="nopass">None</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fieldWifiPassword">Password</label>
+          <input type="text" id="fieldWifiPassword" placeholder="Network password">
+        </div>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="fieldWifiHidden">
+        <label for="fieldWifiHidden">This is a hidden network</label>
+      </div>
+    </div>
+
+    <div class="qr-stage">
+      <div id="qrCanvasHolder">
+        <div class="qr-placeholder" id="qrPlaceholder">Fill in the fields above to generate your QR code</div>
+      </div>
+      <div class="qr-caption">
+        <span>InamTools · Scan me</span>
+        <span class="type-tag" id="typeTag">TEXT</span>
+      </div>
+    </div>
+
+    <div class="qr-actions">
+      <button class="btn" id="copyBtn" type="button" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>
+        Copy text
+      </button>
+      <button class="btn primary" id="downloadBtn" type="button" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5"></path><path d="M5 21h14"></path></svg>
+        Download PNG
+      </button>
+    </div>
+  </main>
+
+  <footer>Generated locally in your browser · No paid API, no images uploaded</footer>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  const holder = document.getElementById('qrCanvasHolder');
+  const placeholder = document.getElementById('qrPlaceholder');
+  const typeTag = document.getElementById('typeTag');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const toastStack = document.getElementById('toastStack');
+  const chips = document.querySelectorAll('.chip');
+  const groups = document.querySelectorAll('.field-group');
+
+  let activeType = 'text';
+  let currentPayload = '';
+  let qrInstance = null;
+  let debounceTimer = null;
+
+  function showToast(message){
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = message;
+    toastStack.appendChild(el);
+    setTimeout(()=>{ el.remove(); }, 2700);
+  }
+
+  function escapeWifi(str){
+    return str.replace(/([\\;,:"])/g, '\\$1');
+  }
+
+  function buildPayload(){
+    switch(activeType){
+      case 'text': {
+        const val = document.getElementById('fieldText').value.trim();
+        return { valid: val.length > 0, payload: val };
+      }
+      case 'url': {
+        let val = document.getElementById('fieldUrl').value.trim();
+        if(!val) return { valid:false, payload:'' };
+        if(!/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(val)){ val = 'https://' + val; }
+        return { valid:true, payload:val };
+      }
+      case 'phone': {
+        const raw = document.getElementById('fieldPhone').value.trim();
+        if(!raw) return { valid:false, payload:'' };
+        const cleaned = raw.replace(/[^\d+]/g, '');
+        return { valid: cleaned.length > 0, payload: `tel:${cleaned}` };
+      }
+      case 'email': {
+        const addr = document.getElementById('fieldEmailAddr').value.trim();
+        if(!addr) return { valid:false, payload:'' };
+        const subject = document.getElementById('fieldEmailSubject').value.trim();
+        const body = document.getElementById('fieldEmailBody').value.trim();
+        const params = [];
+        if(subject) params.push('subject=' + encodeURIComponent(subject));
+        if(body) params.push('body=' + encodeURIComponent(body));
+        const query = params.length ? '?' + params.join('&') : '';
+        return { valid:true, payload: `mailto:${addr}${query}` };
+      }
+      case 'wifi': {
+        const ssid = document.getElementById('fieldWifiSsid').value.trim();
+        if(!ssid) return { valid:false, payload:'' };
+        const enc = document.getElementById('fieldWifiEncryption').value;
+        const pass = document.getElementById('fieldWifiPassword').value;
+        const hidden = document.getElementById('fieldWifiHidden').checked;
+        const encPart = enc === 'nopass' ? 'nopass' : enc;
+        const passPart = enc === 'nopass' ? '' : `P:${escapeWifi(pass)};`;
+        const payload = `WIFI:T:${encPart};S:${escapeWifi(ssid)};${passPart}H:${hidden ? 'true' : 'false'};;`;
+        return { valid:true, payload };
+      }
+      default:
+        return { valid:false, payload:'' };
+    }
+  }
+
+  function clearQR(){
+    holder.innerHTML = '';
+    qrInstance = null;
+  }
+
+  function renderPlaceholder(){
+    clearQR();
+    const ph = document.createElement('div');
+    ph.className = 'qr-placeholder';
+    ph.id = 'qrPlaceholder';
+    ph.textContent = 'Fill in the fields above to generate your QR code';
+    holder.appendChild(ph);
+    copyBtn.disabled = true;
+    downloadBtn.disabled = true;
+  }
+
+  function renderQR(payload){
+    clearQR();
+    try{
+      if(typeof QRCode === 'undefined') throw new Error('QRCode library unavailable');
+      qrInstance = new QRCode(holder, {
+        text: payload,
+        width: 220,
+        height: 220,
+        colorDark: '#12141B',
+        colorLight: '#FFFFFF',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      copyBtn.disabled = false;
+      downloadBtn.disabled = false;
+    }catch(err){
+      const ph = document.createElement('div');
+      ph.className = 'qr-placeholder';
+      ph.textContent = 'QR library failed to load — check your connection and reload.';
+      holder.appendChild(ph);
+      copyBtn.disabled = true;
+      downloadBtn.disabled = true;
+    }
+  }
+
+  function refresh(){
+    const { valid, payload } = buildPayload();
+    currentPayload = payload;
+    typeTag.textContent = activeType === 'wifi' ? 'WI-FI' : activeType.toUpperCase();
+    if(valid){
+      renderQR(payload);
+    } else {
+      renderPlaceholder();
+    }
+  }
+
+  function scheduleRefresh(){
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(refresh, 250);
+  }
+
+  /* ---------- Type switching ---------- */
+  chips.forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeType = chip.dataset.type;
+      groups.forEach(g => g.classList.toggle('active', g.dataset.group === activeType));
+      refresh();
+    });
+  });
+
+  /* ---------- Field listeners ---------- */
+  document.querySelectorAll('.field-group input, .field-group textarea, .field-group select')
+    .forEach(el => el.addEventListener('input', scheduleRefresh));
+  document.getElementById('fieldWifiEncryption').addEventListener('change', scheduleRefresh);
+  document.getElementById('fieldWifiHidden').addEventListener('change', scheduleRefresh);
+
+  /* ---------- Actions ---------- */
+  copyBtn.addEventListener('click', async ()=>{
+    if(!currentPayload) return;
+    try{
+      await navigator.clipboard.writeText(currentPayload);
+    }catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = currentPayload;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    showToast('Copied to clipboard');
+  });
+
+  downloadBtn.addEventListener('click', ()=>{
+    const canvas = holder.querySelector('canvas');
+    if(!canvas){
+      showToast('No QR code to download yet');
+      return;
+    }
+    const link = document.createElement('a');
+    link.download = `inamtools-qr-${activeType}.png`;
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Downloaded as PNG');
+  });
+
+  renderPlaceholder();
+})();
+</script>
+</body>
+</html>

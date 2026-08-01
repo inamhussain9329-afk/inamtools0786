@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer - Resize JPG, PNG & WebP Images Online Free | InamTools</title>
+<meta name="description" content="Free premium Image Resizer by InamTools. Resize JPG, PNG or WebP images by width and height, keep aspect ratio, preview, and download instantly — 100% in your browser.">
+<meta name="keywords" content="image resizer, resize image online, resize jpg, resize png, resize webp, photo resizer, InamTools">
+<meta name="author" content="InamTools">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://inamtools.com/image-resizer">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image Resizer | InamTools">
+<meta property="og:description" content="Resize JPG, PNG or WebP images instantly by width and height. Free, fast, and private — all processing happens in your browser, powered by InamTools.">
+<meta property="og:site_name" content="InamTools">
+<meta property="og:url" content="https://inamtools.com/image-resizer">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Image Resizer | InamTools">
+<meta name="twitter:description" content="Resize images by width and height with live preview — free, instant, and private.">
+
+<meta name="theme-color" content="#0a0c12">
+<style>
+  :root{
+    --bg:#0a0c12;
+    --panel:#12151f;
+    --panel-2:#171b28;
+    --border:#242938;
+    --border-soft:#1c2130;
+    --text:#eef0f8;
+    --muted:#8b93a9;
+    --accent:#7c5cff;
+    --accent-2:#38e0d8;
+    --accent-3:#ff8a5c;
+    --danger:#ff5c7a;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,0.20), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(56,224,216,0.14), transparent 55%),
+      radial-gradient(800px 400px at 50% 100%, rgba(255,138,92,0.08), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    animation:fadeIn .5s ease;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .wrap{width:100%;max-width:700px;}
+
+  .card{
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:clamp(20px, 5vw, 36px);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .brand .logo{
+    width:36px;height:36px;border-radius:11px;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;color:#0a0c12;
+    box-shadow:0 6px 16px rgba(124,92,255,0.35);
+  }
+  .brand span{
+    font-weight:700;
+    letter-spacing:0.3px;
+    color:var(--text);
+    font-size:15px;
+  }
+  h1{
+    font-size:clamp(20px,4.5vw,25px);
+    font-weight:800;
+    margin:20px 0 4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  p.subtitle{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:22px;
+    line-height:1.5;
+  }
+
+  /* Dropzone */
+  .dropzone{
+    border:2px dashed var(--border);
+    border-radius:16px;
+    padding:36px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .2s, background .2s, transform .15s;
+    background:#0d0f17;
+  }
+  .dropzone:hover, .dropzone.dragover{
+    border-color:var(--accent);
+    background:rgba(124,92,255,0.06);
+  }
+  .dropzone .icon{
+    font-size:36px;
+    margin-bottom:10px;
+  }
+  .dropzone .title{
+    font-size:15px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .dropzone .hint{
+    font-size:12.5px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+  #fileInput{display:none;}
+
+  .error{
+    color:var(--danger);
+    font-size:13px;
+    margin-top:10px;
+    display:none;
+    align-items:center;
+    gap:6px;
+  }
+  .error.show{display:flex;}
+
+  /* Editor */
+  .editor{
+    margin-top:24px;
+    display:none;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .editor.show{display:block;opacity:1;transform:translateY(0);}
+
+  .preview-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:20px;
+  }
+  @media (max-width:480px){
+    .preview-grid{grid-template-columns:1fr;}
+  }
+  .preview-box{
+    background:#0d0f17;
+    border:1px solid var(--border-soft);
+    border-radius:14px;
+    padding:14px;
+    text-align:center;
+  }
+  .preview-box .cap{
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--muted);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .preview-box .img-wrap{
+    width:100%;
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      linear-gradient(45deg, #1a1d29 25%, transparent 25%),
+      linear-gradient(-45deg, #1a1d29 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #1a1d29 75%),
+      linear-gradient(-45deg, transparent 75%, #1a1d29 75%);
+    background-size:16px 16px;
+    background-position:0 0, 0 8px, 8px -8px, -8px 0px;
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .preview-box img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    display:block;
+  }
+  .preview-box .meta{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:10px;
+    line-height:1.6;
+  }
+  .preview-box .meta strong{color:var(--text);}
+
+  .section-title{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--muted);
+    margin:20px 0 10px;
+    font-weight:700;
+  }
+
+  .dim-row{
+    display:flex;
+    gap:12px;
+    align-items:flex-end;
+  }
+  .field{flex:1;}
+  label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  input[type="number"]{
+    width:100%;
+    background:#0d0f17;
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:13px 14px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:700;
+    outline:none;
+    transition:border-color .2s, box-shadow .2s;
+    font-family:inherit;
+    -moz-appearance:textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+  }
+  input[type="number"]:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px rgba(124,92,255,0.22);
+  }
+
+  .btn-lock{
+    background:#0d0f17;
+    border:1px solid var(--border);
+    color:var(--muted);
+    width:46px;
+    height:46px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:border-color .2s, color .2s, background .2s;
+    flex-shrink:0;
+  }
+  .btn-lock.active{
+    border-color:var(--accent);
+    color:var(--accent-2);
+    background:rgba(124,92,255,0.1);
+  }
+  .btn-lock:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;}
+
+  .toggle-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .quick-sizes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+  }
+  .quick-size{
+    background:#0d0f17;
+    border:1px solid var(--border);
+    color:var(--muted);
+    font-size:12px;
+    font-weight:600;
+    padding:8px 13px;
+    border-radius:9px;
+    cursor:pointer;
+    transition:border-color .2s, color .2s;
+    font-family:inherit;
+  }
+  .quick-size:hover{border-color:var(--accent);color:var(--text);}
+
+  .format-row{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+  }
+  .format-btn{
+    flex:1;
+    background:#0d0f17;
+    border:1px solid var(--border);
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+    padding:12px;
+    border-radius:11px;
+    cursor:pointer;
+    transition:background .2s, color .2s, border-color .2s;
+    font-family:inherit;
+  }
+  .format-btn.active{
+    background:linear-gradient(135deg, var(--accent), #a06bff);
+    color:#fff;
+    border-color:transparent;
+    box-shadow:0 6px 16px rgba(124,92,255,0.35);
+  }
+
+  .btn-row{
+    display:flex;
+    gap:12px;
+    margin-top:22px;
+    flex-wrap:wrap;
+  }
+  button.action{
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:700;
+    padding:14px 20px;
+    border-radius:13px;
+    transition:transform .15s ease, opacity .15s, box-shadow .2s, border-color .2s;
+    font-family:inherit;
+  }
+  button.action:active{transform:scale(0.96);}
+  button.action:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;}
+  button.action:disabled{opacity:0.5;cursor:not-allowed;}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--accent), #a06bff);
+    color:#fff;
+    flex:1;
+    box-shadow:0 10px 24px rgba(124,92,255,0.35);
+  }
+  .btn-primary:hover{box-shadow:0 12px 30px rgba(124,92,255,0.5);}
+  .btn-secondary{
+    background:transparent;
+    color:var(--muted);
+    border:1px solid var(--border);
+  }
+  .btn-secondary:hover{
+    color:var(--text);
+    border-color:#3a3f52;
+  }
+
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--panel-2);
+    border:1px solid var(--accent);
+    color:var(--text);
+    padding:13px 22px;
+    border-radius:11px;
+    font-size:14px;
+    font-weight:600;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s, transform .25s;
+    box-shadow:0 12px 34px rgba(0,0,0,0.45);
+    z-index:100;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:12.5px;
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--border-soft);
+  }
+  footer strong{color:var(--text);}
+  footer .tagline{
+    display:block;
+    margin-top:4px;
+    font-size:11.5px;
+    opacity:0.75;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="card">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">IT</div>
+      <span>InamTools</span>
+    </div>
+    <h1><span aria-hidden="true">🖼️</span> Image Resizer</h1>
+    <p class="subtitle">Upload a JPG, PNG or WebP image, resize it by width and height, and download instantly — 100% processed in your browser.</p>
+
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload image">
+      <div class="icon" aria-hidden="true">📤</div>
+      <div class="title">Click or drag & drop an image here</div>
+      <div class="hint">Supports JPG, PNG, WebP</div>
+      <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp">
+    </div>
+
+    <div class="error" id="errorMsg" role="alert">
+      <span aria-hidden="true">⚠️</span> <span id="errorText">Please upload a valid image file.</span>
+    </div>
+
+    <div class="editor" id="editor">
+      <div class="preview-grid">
+        <div class="preview-box">
+          <div class="cap">Original</div>
+          <div class="img-wrap"><img id="originalImg" alt="Original uploaded image"></div>
+          <div class="meta">
+            <span id="originalDims">-</span><br>
+            <strong id="originalSize">-</strong>
+          </div>
+        </div>
+        <div class="preview-box">
+          <div class="cap">Resized Preview</div>
+          <div class="img-wrap"><img id="resizedImg" alt="Resized image preview"></div>
+          <div class="meta">
+            <span id="resizedDims">-</span><br>
+            <strong id="resizedSize">-</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Resize Dimensions</div>
+      <div class="dim-row">
+        <div class="field">
+          <label for="widthInput">Width (px)</label>
+          <input type="number" id="widthInput" min="1" max="8000" inputmode="numeric">
+        </div>
+        <button type="button" class="btn-lock active" id="lockBtn" aria-pressed="true" aria-label="Toggle lock aspect ratio" title="Keep aspect ratio">🔗</button>
+        <div class="field">
+          <label for="heightInput">Height (px)</label>
+          <input type="number" id="heightInput" min="1" max="8000" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="quick-sizes" id="quickSizes">
+        <button type="button" class="quick-size" data-w="1920" data-h="1080">1920×1080</button>
+        <button type="button" class="quick-size" data-w="1280" data-h="720">1280×720</button>
+        <button type="button" class="quick-size" data-w="800" data-h="600">800×600</button>
+        <button type="button" class="quick-size" data-w="500" data-h="500">500×500</button>
+        <button type="button" class="quick-size" data-w="150" data-h="150">150×150 (Thumb)</button>
+      </div>
+
+      <div class="section-title">Output Format</div>
+      <div class="format-row">
+        <button type="button" class="format-btn active" data-fmt="image/png" id="fmtPng">PNG</button>
+        <button type="button" class="format-btn" data-fmt="image/jpeg" id="fmtJpg">JPG</button>
+        <button type="button" class="format-btn" data-fmt="image/webp" id="fmtWebp">WebP</button>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="action btn-primary" id="downloadBtn">⬇️ Download Resized Image</button>
+        <button type="button" class="action btn-secondary" id="clearBtn">Clear</button>
+      </div>
+    </div>
+
+    <footer>
+      Made by <strong>InamTools</strong>
+      <span class="tagline">Free online tools — fast, private, and premium.</span>
+    </footer>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<canvas id="workCanvas" style="display:none;"></canvas>
+
+<script>
+(function(){
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const errorMsg = document.getElementById('errorMsg');
+  const errorText = document.getElementById('errorText');
+  const editor = document.getElementById('editor');
+
+  const originalImg = document.getElementById('originalImg');
+  const resizedImg = document.getElementById('resizedImg');
+  const originalDims = document.getElementById('originalDims');
+  const originalSize = document.getElementById('originalSize');
+  const resizedDims = document.getElementById('resizedDims');
+  const resizedSize = document.getElementById('resizedSize');
+
+  const widthInput = document.getElementById('widthInput');
+  const heightInput = document.getElementById('heightInput');
+  const lockBtn = document.getElementById('lockBtn');
+  const quickSizes = document.getElementById('quickSizes');
+  const formatBtns = document.querySelectorAll('.format-btn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const toast = document.getElementById('toast');
+  const canvas = document.getElementById('workCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let aspectLocked = true;
+  let originalWidth = 0, originalHeight = 0;
+  let originalFileSize = 0;
+  let originalFileName = 'image';
+  let selectedFormat = 'image/png';
+  let currentImageEl = null;
+  let resizeTimer = null;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(()=> toast.classList.remove('show'), 2000);
+  }
+
+  function showError(msg){
+    errorText.textContent = msg;
+    errorMsg.classList.add('show');
+  }
+  function hideError(){
+    errorMsg.classList.remove('show');
+  }
+
+  function formatBytes(bytes){
+    if(bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes','KB','MB','GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function handleFile(file){
+    hideError();
+    if(!file){ return; }
+    const validTypes = ['image/jpeg','image/png','image/webp'];
+    if(!validTypes.includes(file.type)){
+      showError('Unsupported file type. Please upload JPG, PNG, or WebP.');
+      return;
+    }
+
+    originalFileSize = file.size;
+    originalFileName = file.name.replace(/\.[^/.]+$/, '') || 'image';
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const img = new Image();
+      img.onload = function(){
+        currentImageEl = img;
+        originalWidth = img.naturalWidth;
+        originalHeight = img.naturalHeight;
+
+        originalImg.src = e.target.result;
+        originalDims.textContent = `${originalWidth} × ${originalHeight} px`;
+        originalSize.textContent = formatBytes(originalFileSize);
+
+        widthInput.value = originalWidth;
+        heightInput.value = originalHeight;
+
+        editor.classList.remove('show');
+        void editor.offsetWidth;
+        editor.classList.add('show');
+
+        renderResized();
+      };
+      img.onerror = function(){
+        showError('Could not load this image. Please try another file.');
+      };
+      img.src = e.target.result;
+    };
+    reader.onerror = function(){
+      showError('Could not read this file. Please try again.');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function renderResized(){
+    if(!currentImageEl) return;
+    let w = parseInt(widthInput.value, 10);
+    let h = parseInt(heightInput.value, 10);
+    if(!w || w <= 0) w = originalWidth;
+    if(!h || h <= 0) h = originalHeight;
+    w = Math.min(w, 8000);
+    h = Math.min(h, 8000);
+
+    canvas.width = w;
+    canvas.height = h;
+    ctx.clearRect(0,0,w,h);
+
+    // white background for JPG (no alpha support)
+    if(selectedFormat === 'image/jpeg'){
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0,0,w,h);
+    }
+
+    ctx.drawImage(currentImageEl, 0, 0, w, h);
+
+    const quality = selectedFormat === 'image/jpeg' || selectedFormat === 'image/webp' ? 0.92 : undefined;
+    const dataUrl = canvas.toDataURL(selectedFormat, quality);
+    resizedImg.src = dataUrl;
+    resizedDims.textContent = `${w} × ${h} px`;
+
+    // estimate size from base64 length
+    const base64Length = dataUrl.length - (dataUrl.indexOf(',') + 1);
+    const approxBytes = Math.round(base64Length * 0.75);
+    resizedSize.textContent = '~' + formatBytes(approxBytes);
+  }
+
+  function debouncedRender(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(renderResized, 150);
+  }
+
+  widthInput.addEventListener('input', ()=>{
+    if(aspectLocked && originalWidth && originalHeight){
+      const ratio = originalHeight / originalWidth;
+      const w = parseInt(widthInput.value, 10);
+      if(w > 0){
+        heightInput.value = Math.round(w * ratio);
+      }
+    }
+    debouncedRender();
+  });
+
+  heightInput.addEventListener('input', ()=>{
+    if(aspectLocked && originalWidth && originalHeight){
+      const ratio = originalWidth / originalHeight;
+      const h = parseInt(heightInput.value, 10);
+      if(h > 0){
+        widthInput.value = Math.round(h * ratio);
+      }
+    }
+    debouncedRender();
+  });
+
+  lockBtn.addEventListener('click', ()=>{
+    aspectLocked = !aspectLocked;
+    lockBtn.classList.toggle('active', aspectLocked);
+    lockBtn.setAttribute('aria-pressed', aspectLocked ? 'true' : 'false');
+    lockBtn.textContent = aspectLocked ? '🔗' : '⛓️‍💥';
+    showToast(aspectLocked ? 'Aspect ratio locked' : 'Aspect ratio unlocked');
+  });
+
+  quickSizes.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.quick-size');
+    if(!btn) return;
+    const w = parseInt(btn.dataset.w, 10);
+    const h = parseInt(btn.dataset.h, 10);
+    widthInput.value = w;
+    if(aspectLocked && originalWidth && originalHeight){
+      const ratio = originalHeight / originalWidth;
+      heightInput.value = Math.round(w * ratio);
+    } else {
+      heightInput.value = h;
+    }
+    renderResized();
+  });
+
+  formatBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      formatBtns.forEach(b=> b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedFormat = btn.dataset.fmt;
+      if(currentImageEl) renderResized();
+    });
+  });
+
+  downloadBtn.addEventListener('click', ()=>{
+    if(!currentImageEl){
+      showToast('Please upload an image first');
+      return;
+    }
+    const ext = selectedFormat === 'image/png' ? 'png' : (selectedFormat === 'image/webp' ? 'webp' : 'jpg');
+    const link = document.createElement('a');
+    link.download = `${originalFileName}-resized.${ext}`;
+    link.href = canvas.toDataURL(selectedFormat, 0.92);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('✅ Image downloaded!');
+  });
+
+  function clearAll(){
+    fileInput.value = '';
+    editor.classList.remove('show');
+    hideError();
+    originalImg.src = '';
+    resizedImg.src = '';
+    originalDims.textContent = '-';
+    originalSize.textContent = '-';
+    resizedDims.textContent = '-';
+    resizedSize.textContent = '-';
+    widthInput.value = '';
+    heightInput.value = '';
+    currentImageEl = null;
+    originalWidth = 0;
+    originalHeight = 0;
+  }
+  clearBtn.addEventListener('click', clearAll);
+
+  // Dropzone interactions
+  dropzone.addEventListener('click', ()=> fileInput.click());
+  dropzone.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); }
+  });
+  fileInput.addEventListener('change', (e)=>{
+    if(e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+  });
+
+  ['dragenter','dragover'].forEach(evt=>{
+    dropzone.addEventListener(evt, (e)=>{
+      e.preventDefault(); e.stopPropagation();
+      dropzone.classList.add('dragover');
+    });
+  });
+  ['dragleave','drop'].forEach(evt=>{
+    dropzone.addEventListener(evt, (e)=>{
+      e.preventDefault(); e.stopPropagation();
+      dropzone.classList.remove('dragover');
+    });
+  });
+  dropzone.addEventListener('drop', (e)=>{
+    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+    if(file) handleFile(file);
+  });
+})();
+</script>
+
+</body>
+</html>
