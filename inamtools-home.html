@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InamTools0786 - Free Online Tools</title>
+<meta name="description" content="Use free online tools for images, text, PDF, calculators, converters, developers and everyday digital tasks.">
+<meta name="keywords" content="InamTools0786, free online tools, image tools, text tools, calculator tools, converter tools, developer tools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#12141B">
+<link rel="canonical" href="https://inamtools0786.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="InamTools0786 - Free Online Tools">
+<meta property="og:description" content="Use free online tools for images, text, PDF, calculators, converters, developers and everyday digital tasks.">
+<meta property="og:site_name" content="InamTools0786">
+<meta property="og:url" content="https://inamtools0786.com/">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="InamTools0786 - Free Online Tools">
+<meta name="twitter:description" content="Fast, simple and free tools for your everyday digital tasks.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312141B'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23C89B3C' text-anchor='middle'%3Ei%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink-950:#12141B;
+    --ink-900:#171A23;
+    --ink-850:#1A1D27;
+    --ink-800:#1D212C;
+    --ink-700:#2A2F3D;
+    --paper:#ECE8DD;
+    --paper-dim:#9A988E;
+    --paper-faint:#6E6C63;
+    --brass:#C89B3C;
+    --brass-dim:#8A7135;
+    --brass-soft:rgba(200,155,60,0.14);
+    --teal:#5FA8A0;
+    --shadow:0 16px 40px rgba(0,0,0,0.38);
+    --shadow-sm:0 6px 18px rgba(0,0,0,0.28);
+    --glass-bg:rgba(23,26,35,0.62);
+    --glass-border:rgba(255,255,255,0.07);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:
+      radial-gradient(ellipse 1000px 560px at 12% -8%, rgba(200,155,60,0.10), transparent 58%),
+      radial-gradient(ellipse 800px 640px at 100% 6%, rgba(95,168,160,0.07), transparent 55%),
+      var(--ink-950);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index:0;
+  }
+
+  /* Animated ambient blobs */
+  .blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:0.35;
+    pointer-events:none;
+    z-index:0;
+  }
+  .blob1{ width:420px;height:420px; background:radial-gradient(circle, rgba(200,155,60,0.5), transparent 70%); top:-160px; left:-120px; animation:driftA 16s ease-in-out infinite; }
+  .blob2{ width:360px;height:360px; background:radial-gradient(circle, rgba(95,168,160,0.4), transparent 70%); top:8%; right:-140px; animation:driftB 19s ease-in-out infinite; }
+  @keyframes driftA{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(40px,50px);} }
+  @keyframes driftB{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-35px,35px);} }
+
+  .wrap{ position:relative; z-index:1; max-width:1140px; margin:0 auto; padding:0 24px; }
+
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Sticky Nav ---------- */
+  .navbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:transparent;
+    transition:background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    border-bottom:1px solid transparent;
+  }
+  .navbar.scrolled{
+    background:var(--glass-bg);
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    border-bottom:1px solid var(--glass-border);
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 0;
+    animation:riseIn .5s ease both;
+    gap:16px;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    text-decoration:none;
+    display:flex;
+    align-items:baseline;
+    gap:1px;
+    flex-shrink:0;
+  }
+  .logo .dot{ color:var(--brass); font-style:italic; }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:26px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .nav-links a{
+    font-size:13.5px;
+    font-weight:500;
+    text-decoration:none;
+    color:var(--paper-dim);
+    transition:color .15s ease;
+    position:relative;
+    padding:4px 0;
+  }
+  .nav-links a:hover, .nav-links a.active{ color:var(--paper); }
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-6px;
+    height:2px;
+    background:var(--brass);
+    border-radius:2px;
+  }
+
+  .nav-right{ display:flex; align-items:center; gap:10px; }
+
+  .nav-search-btn, .hamburger{
+    background:transparent;
+    border:1px solid var(--ink-700);
+    color:var(--paper-dim);
+    border-radius:8px;
+    width:38px; height:38px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .nav-search-btn:hover, .hamburger:hover{ border-color:var(--brass-dim); color:var(--paper); }
+  .nav-search-btn svg, .hamburger svg{ width:17px; height:17px; }
+  .hamburger{ display:none; }
+
+  .mobile-menu{
+    display:none;
+    flex-direction:column;
+    gap:4px;
+    padding:12px 0 20px;
+    animation:fadeIn .2s ease both;
+  }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{
+    padding:12px 6px;
+    font-size:14.5px;
+    text-decoration:none;
+    color:var(--paper-dim);
+    border-bottom:1px solid var(--ink-800);
+  }
+  .mobile-menu a:active{ color:var(--brass); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:64px 0 48px;
+    text-align:center;
+    border-bottom:1px solid var(--ink-800);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 18px;
+    animation:riseIn .5s ease .06s both;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(34px, 6vw, 58px);
+    line-height:1.08;
+    letter-spacing:-0.015em;
+    margin:0 0 20px;
+    animation:riseIn .5s ease .1s both;
+  }
+  h1 .accent{ font-style:italic; color:var(--brass); }
+
+  .subhead{
+    font-size:16.5px;
+    line-height:1.6;
+    color:var(--paper-dim);
+    max-width:520px;
+    margin:0 auto 30px;
+    animation:riseIn .5s ease .14s both;
+  }
+
+  .hero-actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:34px;
+    animation:riseIn .5s ease .16s both;
+  }
+  .btn{
+    font-size:13.5px;
+    font-weight:600;
+    padding:13px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .2s ease, border-color .15s ease, background .15s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn:active{ transform:scale(0.97); }
+  .btn-brass{
+    background:var(--brass);
+    color:var(--ink-950);
+    box-shadow:0 10px 24px rgba(200,155,60,0.28);
+  }
+  .btn-brass:hover{ box-shadow:0 14px 30px rgba(200,155,60,0.4); transform:translateY(-1px); }
+  .btn-outline{
+    background:var(--glass-bg);
+    backdrop-filter:blur(10px);
+    border-color:var(--ink-700);
+    color:var(--paper);
+  }
+  .btn-outline:hover{ border-color:var(--brass-dim); transform:translateY(-1px); }
+
+  /* ---------- Search ---------- */
+  .search-shell{
+    max-width:560px;
+    margin:0 auto 22px;
+    animation:riseIn .5s ease .18s both;
+  }
+  .search-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--glass-bg);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid var(--ink-700);
+    border-radius:12px;
+    padding:14px 16px;
+    box-shadow:var(--shadow-sm);
+    transition:border-color .18s ease, box-shadow .18s ease;
+  }
+  .search-bar:focus-within{
+    border-color:var(--brass-dim);
+    box-shadow:var(--shadow-sm), 0 0 0 3px var(--brass-soft);
+  }
+  .search-bar svg{ width:17px; height:17px; flex-shrink:0; color:var(--paper-faint); }
+  .search-bar input{
+    flex:1;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size:15px;
+  }
+  .search-bar input::placeholder{ color:var(--paper-faint); }
+  .kbd-hint{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--paper-faint);
+    border:1px solid var(--ink-700);
+    border-radius:4px;
+    padding:2px 6px;
+    flex-shrink:0;
+  }
+  .search-result-count{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--paper-faint);
+    margin-top:10px;
+    min-height:14px;
+  }
+
+  .chips{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    animation:riseIn .5s ease .22s both;
+  }
+  .chip{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    background:transparent;
+    color:var(--paper-dim);
+    border:1px solid var(--ink-700);
+    border-radius:999px;
+    padding:7px 14px;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .chip:hover{ border-color:var(--brass-dim); color:var(--paper); }
+  .chip.active{ background:var(--brass); border-color:var(--brass); color:var(--ink-950); }
+
+  /* ---------- Stats ---------- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+    padding:44px 0;
+    border-bottom:1px solid var(--ink-800);
+  }
+  .stat-card{
+    background:var(--glass-bg);
+    backdrop-filter:blur(14px);
+    border:1px solid var(--glass-border);
+    border-radius:14px;
+    padding:20px 14px;
+    text-align:center;
+  }
+  .stat-num{
+    font-family:'Fraunces', serif;
+    font-size:clamp(22px,4vw,30px);
+    font-weight:600;
+    color:var(--brass);
+  }
+  .stat-label{
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--paper-dim);
+    margin-top:6px;
+  }
+  @media (max-width:640px){ .stats{ grid-template-columns:repeat(2, 1fr); } }
+
+  /* ---------- Section heads ---------- */
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:26px;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:26px;
+    margin:0;
+  }
+  .section-note{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+  }
+
+  /* ---------- Featured ---------- */
+  .featured{ padding:56px 0 12px; }
+  .featured-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:14px;
+  }
+  .feat-card{
+    background:linear-gradient(160deg, var(--ink-800), var(--ink-850));
+    border:1px solid var(--brass-dim);
+    border-radius:14px;
+    padding:18px;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .feat-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow); border-color:var(--brass); }
+  .feat-icon{
+    width:38px;height:38px;
+    border-radius:9px;
+    background:var(--ink-900);
+    border:1px solid var(--ink-700);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--brass);
+  }
+  .feat-icon svg{ width:18px; height:18px; }
+  .feat-card h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:16.5px;
+    margin:0;
+  }
+  .feat-card span.feat-cat{
+    font-family:'Space Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--paper-faint);
+  }
+
+  /* ---------- Categories ---------- */
+  .categories{ padding:56px 0 12px; }
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+    gap:14px;
+  }
+  .cat-card{
+    background:var(--glass-bg);
+    backdrop-filter:blur(12px);
+    border:1px solid var(--glass-border);
+    border-radius:14px;
+    padding:18px;
+    cursor:pointer;
+    text-align:left;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .cat-card:hover{ transform:translateY(-3px); border-color:var(--teal); box-shadow:var(--shadow-sm); }
+  .cat-card h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:16px;
+    margin:0;
+    color:var(--paper);
+  }
+  .cat-card .cat-count{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--teal);
+  }
+
+  /* ---------- Toolbox grid ---------- */
+  .toolbox{ padding:56px 0 40px; }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+    gap:16px;
+  }
+
+  .card{
+    position:relative;
+    background:var(--ink-800);
+    border:1px solid var(--ink-700);
+    border-radius:14px;
+    padding:22px 22px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    box-shadow:var(--shadow-sm);
+    animation:riseIn .45s ease both;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .card.is-live{ border-color:var(--brass-dim); }
+  .card.is-live:hover{ transform:translateY(-3px); box-shadow:var(--shadow); border-color:var(--brass); }
+  .card.is-soon{ opacity:0.68; }
+  .card.is-soon:hover{ opacity:0.85; }
+
+  .card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+
+  .icon-tile{
+    width:42px; height:42px;
+    border-radius:9px;
+    background:var(--ink-900);
+    border:1px solid var(--ink-700);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--brass);
+    flex-shrink:0;
+  }
+  .card.is-soon .icon-tile{ color:var(--paper-faint); }
+  .icon-tile svg{ width:20px; height:20px; }
+
+  .pill-group{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+  .status-pill{
+    font-family:'Space Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+    height:fit-content;
+  }
+  .status-pill.live{ background:var(--brass); color:var(--ink-950); }
+  .status-pill.soon{ background:transparent; border:1px solid var(--ink-700); color:var(--paper-faint); }
+  .cat-pill{
+    font-family:'Space Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--teal);
+    background:rgba(95,168,160,0.1);
+    border:1px solid rgba(95,168,160,0.25);
+    padding:3px 8px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+
+  .card h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:19px;
+    margin:0;
+  }
+  .card p{
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--paper-dim);
+    margin:0;
+    flex:1;
+  }
+
+  .card-link{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    color:var(--brass);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:gap .15s ease;
+  }
+  .card-link:hover{ gap:9px; }
+  .card-note{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--paper-faint);
+  }
+
+  .empty-state{
+    display:none;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--paper-dim);
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    animation:fadeIn .3s ease both;
+  }
+  .empty-state.show{ display:block; }
+  .empty-state strong{ color:var(--paper); }
+
+  /* ---------- About ---------- */
+  .about{ padding:56px 0; border-top:1px solid var(--ink-800); }
+  .about-box{
+    background:var(--glass-bg);
+    backdrop-filter:blur(14px);
+    border:1px solid var(--glass-border);
+    border-radius:16px;
+    padding:32px;
+    max-width:680px;
+  }
+  .about-box h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:24px;
+    margin:0 0 12px;
+  }
+  .about-box p{
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--paper-dim);
+    margin:0 0 10px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--ink-800);
+    padding:40px 0 48px;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:28px;
+    margin-bottom:26px;
+  }
+  .footer-brand{
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    color:var(--paper);
+    margin-bottom:6px;
+  }
+  .footer-brand .dot{ color:var(--brass); font-style:italic; }
+  .footer-tagline{
+    font-size:13px;
+    color:var(--paper-dim);
+    max-width:280px;
+    line-height:1.55;
+  }
+  .footer-links{
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+  }
+  .footer-col h5{
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--paper-faint);
+    margin:0 0 12px;
+  }
+  .footer-col a{
+    display:block;
+    font-size:13px;
+    color:var(--paper-dim);
+    text-decoration:none;
+    margin-bottom:9px;
+    transition:color .15s ease;
+  }
+  .footer-col a:hover{ color:var(--brass); }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding-top:22px;
+    border-top:1px solid var(--ink-800);
+  }
+  .footer-note{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--paper-faint);
+  }
+
+  /* ---------- Back to top ---------- */
+  .back-to-top{
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--brass);
+    color:var(--ink-950);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 12px 28px rgba(0,0,0,0.4);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s;
+    z-index:60;
+  }
+  .back-to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
+  .back-to-top svg{ width:19px; height:19px; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    nav, .eyebrow, h1, .subhead, .search-shell, .chips, .card, .empty-state, .reveal{ animation:none !important; transition:none !important; }
+    .blob{ animation:none !important; }
+  }
+
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .hamburger{ display:flex; }
+  }
+
+  @media (max-width:640px){
+    .hero{ padding:48px 0 36px; }
+    nav{ padding:16px 0; }
+    .section-head{ flex-direction:column; align-items:flex-start; }
+    .kbd-hint{ display:none; }
+    .stats{ grid-template-columns:repeat(2,1fr); }
+    .footer-top{ flex-direction:column; }
+    .footer-links{ gap:24px; }
+    .back-to-top{ right:16px; bottom:16px; width:42px; height:42px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob1" aria-hidden="true"></div>
+<div class="blob blob2" aria-hidden="true"></div>
+
+<div class="navbar" id="navbar">
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top"><span>InamTools0786</span><span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#top" class="nav-link active" data-section="top">Home</a></li>
+        <li><a href="#tools" class="nav-link" data-section="tools">All Tools</a></li>
+        <li><a href="#categories" class="nav-link" data-section="categories">Categories</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="nav-search-btn" id="navSearchBtn" aria-label="Search tools">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        </button>
+        <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#top">Home</a>
+      <a href="#tools">All Tools</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero" id="top">
+    <p class="eyebrow">Free · Fast · No sign-up required</p>
+    <h1>Powerful <span class="accent">Free</span><br>Online Tools</h1>
+    <p class="subhead">Fast, simple and free tools for your everyday digital tasks. No sign-ups, no clutter — just the tool you need, when you need it.</p>
+
+    <div class="hero-actions">
+      <button type="button" class="btn btn-brass" id="heroSearchBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        Search Tools
+      </button>
+      <a class="btn btn-outline" href="#tools">Explore All Tools →</a>
+    </div>
+
+    <div class="search-shell">
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input type="text" id="searchInput" placeholder="Search tools — try “image” or “calculator”" autocomplete="off" aria-label="Search tools">
+        <span class="kbd-hint">/</span>
+      </div>
+      <div class="search-result-count" id="searchResultCount"></div>
+    </div>
+
+    <div class="chips" id="chips">
+      <button class="chip active" data-filter="all" type="button">All tools</button>
+    </div>
+  </header>
+
+  <section class="stats reveal" id="stats" aria-label="Site statistics">
+    <div class="stat-card">
+      <div class="stat-num" id="statToolCount">0+</div>
+      <div class="stat-label">Free Tools</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Free Forever</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">✓</div>
+      <div class="stat-label">Mobile Friendly</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">0</div>
+      <div class="stat-label">No Installation</div>
+    </div>
+  </section>
+
+  <section class="featured reveal" id="featured" aria-label="Popular tools">
+    <div class="section-head">
+      <h2>Popular Tools</h2>
+      <span class="section-note">Most used this week</span>
+    </div>
+    <div class="featured-grid" id="featuredGrid"></div>
+  </section>
+
+  <section class="categories reveal" id="categories" aria-label="Tool categories">
+    <div class="section-head">
+      <h2>Categories</h2>
+      <span class="section-note">Browse by type</span>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </section>
+
+  <main>
+  <section class="toolbox" id="tools">
+    <div class="section-head">
+      <h2>The toolbox</h2>
+      <span class="section-note" id="toolboxCount"></span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty-state" id="emptyState">No tools found matching <strong id="emptyQuery"></strong> — try a different search or category.</div>
+  </section>
+  </main>
+
+  <section class="about reveal" id="about" aria-label="About InamTools0786">
+    <div class="about-box">
+      <h2>About InamTools0786</h2>
+      <p>InamTools0786 is a growing toolbox of fast, focused web tools for everyday digital tasks — from calculators and converters to image and developer utilities.</p>
+      <p>Every tool runs entirely in your browser: no sign-ups, no installs, and no data ever leaves your device.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">InamTools0786<span class="dot">.</span></div>
+        <p class="footer-tagline">Free online tools made simple.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Site</h5>
+          <a href="#top">Home</a>
+          <a href="#tools">All Tools</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="footer-col">
+          <h5>Categories</h5>
+          <div id="footerCategoryLinks"></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-note">New tools ship regularly · Built for everyday digital work</div>
+      <div class="footer-note" id="footerToolCount"></div>
+    </div>
+  </footer>
+
+</div>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script>
+(function(){
+  /* =========================================================
+     TOOLS DATA — built from actual HTML files in the project.
+     Only tools with a real "href" are linked; all others are
+     shown as "Coming soon" placeholders with no link.
+     ========================================================= */
+  const TOOLS = [
+    {
+      name: "Word Counter",
+      description: "Count words, characters, sentences and paragraphs — with a live reading-time estimate as you type.",
+      status: "live",
+      category: "Text Tools",
+      featured: true,
+      href: "word-counter.html",
+      icon: '<span style="font-family:\'Space Mono\',monospace;font-weight:700;font-size:13px;">123</span>'
+    },
+    {
+      name: "Age Calculator",
+      description: "Calculate your exact age in years, months and days, plus total days lived and your next birthday countdown.",
+      status: "live",
+      category: "Calculator Tools",
+      featured: true,
+      href: "age-calculator-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>'
+    },
+    {
+      name: "BMI Calculator",
+      description: "Calculate your Body Mass Index instantly with a colorful meter, category, and healthy weight range.",
+      status: "live",
+      category: "Calculator Tools",
+      featured: true,
+      href: "bmi-calculator-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3M5 8l2 2M19 8l-2 2M3 14h18"></path><circle cx="12" cy="14" r="7"></circle><path d="M12 14l3-3"></path></svg>'
+    },
+    {
+      name: "Unit Converter",
+      description: "Convert Length, Weight, Temperature, Speed, Area and Volume between units with live results.",
+      status: "live",
+      category: "Converter Tools",
+      featured: true,
+      href: "unit-converter-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h11l-3-3M17 17H6l3 3"></path></svg>'
+    },
+    {
+      name: "Image Resizer",
+      description: "Resize JPG, PNG or WebP images by width and height with aspect-ratio lock and instant preview.",
+      status: "live",
+      category: "Image Tools",
+      featured: false,
+      href: "image-resizer-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 21v-4a1 1 0 0 1 1-1h4M21 8h-4a1 1 0 0 1-1-1V3"></path></svg>'
+    },
+    {
+      name: "Image Compressor",
+      description: "Compress JPG, PNG or WebP images with a live quality slider and before/after comparison.",
+      status: "live",
+      category: "Image Tools",
+      featured: true,
+      href: "image-compressor-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M4 21l7-7"></path></svg>'
+    },
+    {
+      name: "Color Picker & Converter",
+      description: "Pick any color and instantly convert between HEX, RGB and HSL. Copy codes and save recent picks.",
+      status: "live",
+      category: "Developer Tools",
+      featured: false,
+      href: "color-picker-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3"></circle></svg>'
+    },
+    {
+      name: "JSON Formatter & Validator",
+      description: "Pretty print, minify, and validate JSON instantly with line numbers and clear error messages.",
+      status: "live",
+      category: "Developer Tools",
+      featured: true,
+      href: "json-formatter-pro.html",
+      icon: '<span style="font-family:\'Space Mono\',monospace;font-weight:700;font-size:14px;">{ }</span>'
+    },
+    {
+      name: "Base64 Encoder & Decoder",
+      description: "Encode text to Base64 or decode Base64 to text instantly with drag & drop file support.",
+      status: "live",
+      category: "Developer Tools",
+      featured: false,
+      href: "base64-encoder-decoder-pro.html",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>'
+    },
+    {
+      name: "Case Converter",
+      description: "Switch any text between UPPERCASE, lowercase, Title Case and sentence case in one click.",
+      status: "soon",
+      category: "Text Tools",
+      featured: false,
+      icon: '<span style="font-family:\'Fraunces\',serif;font-weight:600;font-size:15px;">Aa</span>'
+    },
+    {
+      name: "Text Diff",
+      description: "Compare two blocks of text and see exactly what was added, removed, or changed.",
+      status: "soon",
+      category: "Text Tools",
+      featured: false,
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h11M4 12h16M4 17h8"></path></svg>'
+    },
+    {
+      name: "QR Code Generator",
+      description: "Turn any link, note, or contact card into a clean, scannable QR code.",
+      status: "soon",
+      category: "Utility Tools",
+      featured: false,
+      icon: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="3" height="3"></rect><rect x="18" y="18" width="3" height="3"></rect></svg>'
+    },
+    {
+      name: "Password Generator",
+      description: "Create strong, random passwords with custom length and character rules.",
+      status: "soon",
+      category: "Utility Tools",
+      featured: false,
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l9-9M17 6l3 3M20 3l1 1"></path></svg>'
+    },
+    {
+      name: "PDF Merger",
+      description: "Combine multiple PDF files into a single, clean document in your browser.",
+      status: "soon",
+      category: "PDF Tools",
+      featured: false,
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="12" height="15" rx="2"></rect><rect x="8" y="6" width="12" height="15" rx="2" fill="var(--ink-800)"></rect></svg>'
+    }
+  ];
+
+  const grid = document.getElementById('grid');
+  const emptyState = document.getElementById('emptyState');
+  const emptyQuery = document.getElementById('emptyQuery');
+  const toolboxCount = document.getElementById('toolboxCount');
+  const searchInput = document.getElementById('searchInput');
+  const searchResultCount = document.getElementById('searchResultCount');
+  const chipsWrap = document.getElementById('chips');
+  const featuredGrid = document.getElementById('featuredGrid');
+  const catGrid = document.getElementById('catGrid');
+  const footerCategoryLinks = document.getElementById('footerCategoryLinks');
+  const statToolCount = document.getElementById('statToolCount');
+  const footerToolCount = document.getElementById('footerToolCount');
+
+  let activeFilter = 'all';
+
+  // ---- Build category list dynamically (skip empty categories) ----
+  const categories = [...new Set(TOOLS.map(t => t.category))];
+
+  function cardHTML(tool){
+    const isLive = tool.status === 'live';
+    const statusLabel = isLive ? 'Live' : 'Soon';
+    const bottom = isLive
+      ? `<a class="card-link" href="${tool.href}">Open tool <span aria-hidden="true">→</span></a>`
+      : `<span class="card-note">Coming soon</span>`;
+
+    return `
+      <div class="card ${isLive ? 'is-live' : 'is-soon'}" data-category="${tool.category}">
+        <div class="card-top">
+          <div class="icon-tile">${tool.icon}</div>
+          <div class="pill-group">
+            <span class="status-pill ${tool.status}">${statusLabel}</span>
+            <span class="cat-pill">${tool.category}</span>
+          </div>
+        </div>
+        <h3>${tool.name}</h3>
+        <p>${tool.description}</p>
+        ${bottom}
+      </div>
+    `;
+  }
+
+  function render(){
+    const query = searchInput.value.trim().toLowerCase();
+
+    let filtered = TOOLS.filter(t => {
+      const matchesFilter = activeFilter === 'all' || t.category === activeFilter;
+      const matchesQuery = !query || t.name.toLowerCase().includes(query) || t.description.toLowerCase().includes(query) || t.category.toLowerCase().includes(query);
+      return matchesFilter && matchesQuery;
+    });
+
+    grid.innerHTML = filtered.map(cardHTML).join('');
+
+    if(filtered.length === 0){
+      emptyState.classList.add('show');
+      emptyQuery.textContent = query ? `“${query}”` : 'this category';
+    } else {
+      emptyState.classList.remove('show');
+    }
+
+    const liveCount = TOOLS.filter(t => t.status === 'live').length;
+    toolboxCount.textContent = `${TOOLS.length} tools · ${liveCount} live`;
+
+    if(query){
+      searchResultCount.textContent = `${filtered.length} result${filtered.length === 1 ? '' : 's'} for “${query}”`;
+    } else {
+      searchResultCount.textContent = '';
+    }
+  }
+
+  function renderChips(){
+    let html = `<button class="chip active" data-filter="all" type="button">All tools</button>`;
+    categories.forEach(cat=>{
+      html += `<button class="chip" data-filter="${cat}" type="button">${cat}</button>`;
+    });
+    chipsWrap.innerHTML = html;
+    chipsWrap.querySelectorAll('.chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        chipsWrap.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeFilter = chip.dataset.filter;
+        render();
+      });
+    });
+  }
+
+  function renderFeatured(){
+    const featured = TOOLS.filter(t => t.featured && t.status === 'live');
+    featuredGrid.innerHTML = featured.map(tool => `
+      <a class="feat-card" href="${tool.href}">
+        <div class="feat-icon">${tool.icon}</div>
+        <h3>${tool.name}</h3>
+        <span class="feat-cat">${tool.category}</span>
+      </a>
+    `).join('');
+  }
+
+  function renderCategories(){
+    catGrid.innerHTML = categories.map(cat=>{
+      const count = TOOLS.filter(t => t.category === cat).length;
+      return `<button type="button" class="cat-card" data-cat="${cat}">
+        <h4>${cat}</h4>
+        <span class="cat-count">${count} tool${count === 1 ? '' : 's'}</span>
+      </button>`;
+    }).join('');
+
+    catGrid.querySelectorAll('.cat-card').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const cat = btn.dataset.cat;
+        activeFilter = cat;
+        chipsWrap.querySelectorAll('.chip').forEach(c=>{
+          c.classList.toggle('active', c.dataset.filter === cat);
+        });
+        render();
+        document.getElementById('tools').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    footerCategoryLinks.innerHTML = categories.map(cat=>
+      `<a href="#tools" data-cat="${cat}">${cat}</a>`
+    ).join('');
+    footerCategoryLinks.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const cat = a.dataset.cat;
+        activeFilter = cat;
+        chipsWrap.querySelectorAll('.chip').forEach(c=>{
+          c.classList.toggle('active', c.dataset.filter === cat);
+        });
+        render();
+        document.getElementById('tools').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+  }
+
+  function renderStats(){
+    const liveCount = TOOLS.filter(t => t.status === 'live').length;
+    statToolCount.textContent = liveCount + '+';
+    footerToolCount.textContent = `${liveCount} live tools · ${TOOLS.length} total`;
+  }
+
+  searchInput.addEventListener('input', render);
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === '/' && document.activeElement !== searchInput){
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+
+  // Hero + nav search buttons focus the main search field
+  function focusSearch(){
+    document.getElementById('top').scrollIntoView({behavior:'smooth', block:'start'});
+    setTimeout(()=> searchInput.focus(), 350);
+  }
+  document.getElementById('heroSearchBtn').addEventListener('click', focusSearch);
+  document.getElementById('navSearchBtn').addEventListener('click', focusSearch);
+
+  // ---- Mobile menu ----
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', ()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded','false');
+    });
+  });
+
+  // ---- Sticky nav background on scroll + active link scroll-spy ----
+  const navbar = document.getElementById('navbar');
+  const navLinkEls = document.querySelectorAll('.nav-link');
+  const sections = ['top','tools','categories','about'].map(id => document.getElementById(id)).filter(Boolean);
+  const backToTop = document.getElementById('backToTop');
+
+  function onScroll(){
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    backToTop.classList.toggle('show', window.scrollY > 500);
+
+    let currentId = 'top';
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 120){ currentId = sec.id; }
+    });
+    navLinkEls.forEach(a=>{
+      a.classList.toggle('active', a.dataset.section === currentId);
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  backToTop.addEventListener('click', ()=>{
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // ---- Scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  // ---- Init ----
+  renderChips();
+  renderFeatured();
+  renderCategories();
+  renderStats();
+  render();
+})();
+</script>
+</body>
+</html>
